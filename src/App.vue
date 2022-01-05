@@ -1,16 +1,25 @@
-<template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+<template> <!--（1）-->
+    あなたの名前：<input v-model="name"><!-- テキストボックス ...（1a）-->
+    <div>→あなたは{{ name }}さん</div><!-- 名前の表示 ...（1b）-->
+    <button v-on:click="onButtonClicked()">あいさつ</button> <!-- ボタン ...（1c）-->
 </template>
 
-<script lang="ts">
+<script lang="ts"> // <!--（2）-->
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { MyFirstTS } from './my-first-ts'; // MyFirstTSクラスをインポート ...（2a）
 
-export default defineComponent({
-  name: 'App',
-  components: {
-    HelloWorld
+export default defineComponent({ // defineComponentはTypeScriptの型推論に必要 ...（2b）
+  data() { // データ ...（2c）
+    return {
+      name: '吉川英一'
+    }
+  },
+  methods: { // メソッド ..（2d）
+    onButtonClicked() {
+      // MyFirstTSクラスを利用してあいさつ文を作ってダイアログ表示 ...（2e）
+      const myFirstTS = new MyFirstTS(this.name)
+      alert(myFirstTS.getGreetText())
+    }
   }
 });
 </script>
